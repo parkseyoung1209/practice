@@ -1,0 +1,11 @@
+package dataStructure.linkedList;
+
+public class List {
+	ListNode head;
+
+	public List(ListNode head) {
+		this.head = null;
+	}
+	
+	
+}

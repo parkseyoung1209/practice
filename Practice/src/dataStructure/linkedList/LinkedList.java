@@ -43,18 +43,34 @@ public class LinkedList {
 	 * - 탐색: O(n) (특정 값을 찾기 위해 전체 리스트를 순회해야 함)
 	 */
 
+	
+	
+	
+	// 숫자 5개를 입력받아 팰린드롬 구조인지 판별
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 		LinkedList arr = new LinkedList();
-		int num = Integer.parseInt(sc.nextLine());
-		ListNode node = new ListNode(num);
+		List list = new List();
+		Scanner sc = new Scanner(System.in);
+		int count = 0;
+		
+		while(count<5) {
+			int num = Integer.parseInt(sc.nextLine());
+			list.add(num);
+			count++;
+		}
+//		boolean abc = arr.checkByLinkedList(list.head);
+		boolean abc = arr.checkRunner(list.head);
+		System.out.println(abc);
 	}
 	
 	public boolean check(ListNode head) {
-		Deque<Integer> stack = new ArrayDeque<>();
+		//Stack<Integer> stack = new Stack<>();
+		Deque<Integer> stack = new ArrayDeque<Integer>();
 		ListNode node = head;
 		while(node != null) {
-			stack.add(node.value);
+			stack.push(node.value); 
+			// 기존 stack 사용시 add를 써도 후입선출이 가능하나 deque를 쓰면 add가 큐의 add처럼 쓰이기 때문에
+			// 1,2,3,4,5를 출력하면 그대로 1,2,3,4,5가 나와 연결리스트와 비교시 무조건 true가 뜬다.
 			node = node.next;
 		}
 		
@@ -64,7 +80,50 @@ public class LinkedList {
 			}
 			head = head.next;
 		}
-		System.out.println(stack);
+		return true;
+	}
+	public boolean checkByLinkedList(ListNode head) {
+		
+		Deque<Integer> deque = new java.util.LinkedList<Integer>();
+		ListNode node = head;
+		while(node != null) {
+			deque.push(node.value);
+			node = node.next;
+		}
+		
+		while(!deque.isEmpty() && deque.size() >1) {
+			if(deque.pollFirst() != deque.pollLast()) return false;
+			// 자바의 데큐 컬렉션은 시작과 끝에서 모두 추출 가능한 자료구조이다.
+			// 여기서 pollfirst와 pollLast는 이름처럼 처음과 끝을 빼는 매서드이다. 		
+		}
+		return true;
+	}
+	
+	public boolean checkRunner(ListNode head) {
+		ListNode fast = head , slow = head; // 같은 값에 같은 타입의 변수는 콤마로 지정 가능
+		while(fast != null && fast.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+		
+		if(fast != null) {
+			slow = slow.next;
+		}
+		ListNode rev = null;
+		while(slow != null) {
+			ListNode node2 = slow.next;
+			slow.next = rev;
+			rev = slow;
+			slow = node2;
+		}
+		
+		while(rev!= null) {
+			if(rev.value != head.value) {
+				return false;
+			}
+			rev = rev.next;
+			head = head.next;
+		}
 		return true;
 	}
 }

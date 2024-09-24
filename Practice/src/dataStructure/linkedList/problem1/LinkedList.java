@@ -1,4 +1,4 @@
-package dataStructure.linkedList;
+package dataStructure.linkedList.problem1;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

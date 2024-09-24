@@ -1,4 +1,4 @@
-package dataStructure.linkedList;
+package dataStructure.linkedList.problem2;
 
 public class ListNode {
 	int value;

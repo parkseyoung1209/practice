@@ -1,4 +1,4 @@
-package dataStructure.linkedList.problem6;
+package dataStructure.linkedList.problem7;
 
 public class List {
 	ListNode head;
@@ -26,9 +26,8 @@ public class List {
 		}
 	}
 	
-	public void deleteByValue(int value) {
+	public void deleteInValue(int value) {
 		if(head == null) {
-			System.out.println("리스트 존재하지 않음");
 			return;
 		}
 		if(head.value == value) {
@@ -45,11 +44,8 @@ public class List {
 		}
 		
 		if(currentNode == null) {
-			System.out.println("값 입력 잘못");
 			return;
 		}
-		
 		previousNode.next = currentNode.next;
 	}
-
 }

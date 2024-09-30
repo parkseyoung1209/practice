@@ -10,6 +10,7 @@ public class List {
 			head = node;
 			return;
 		}
+		
 		ListNode currentNode = head;
 		while(currentNode.next != null) {
 			currentNode = currentNode.next;
@@ -18,10 +19,33 @@ public class List {
 	}
 	
 	public void printList() {
+		ListNode node = head;
+		while(node != null) {
+			System.out.println(node.value);
+			node = node.next;
+		}
+	}
+	
+	public void deleteInValue(int value) {
+		if(head == null) {
+			return;
+		}
+		if(head.value == value) {
+			head = head.next;
+			return;
+		}
+		
 		ListNode currentNode = head;
-		while(currentNode != null) {
-			System.out.println(currentNode.value);
+		ListNode previousNode = null;
+		
+		while(currentNode != null && currentNode.value != value) {
+			previousNode = currentNode;
 			currentNode = currentNode.next;
 		}
+		
+		if(currentNode == null) {
+			return;
+		}
+		previousNode.next = currentNode.next;
 	}
 }

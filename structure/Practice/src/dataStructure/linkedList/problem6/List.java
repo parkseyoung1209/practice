@@ -46,6 +46,7 @@ public class List {
 		
 		if(currentNode == null) {
 			System.out.println("값 입력 잘못");
+			return;
 		}
 		
 		previousNode.next = currentNode.next;
